@@ -1,22 +1,27 @@
 import pandas as pd
 
 # Đọc dữ liệu từ file CSV
-df = pd.read_csv("Dataset/online_sales_dataset_cleaned.csv", parse_dates=['InvoiceDate'])
+df = pd.read_csv("Dataset/ticket_sales_cleaned.csv")
 
-# Sắp xếp theo thời gian để đảm bảo đúng chuỗi thời gian
-df = df.sort_values('InvoiceDate').reset_index(drop=True)
+# Sắp xếp theo thời gian để đảm bảo thứ tự chuỗi thời gian
+df = df.sort_values('date').reset_index(drop=True)
 
-# Tính toán kích thước các tập
-total_len = len(df)
-train_size = int(0.7 * total_len)
-valid_size = int(0.1 * total_len)
+# Tính số dòng cho từng tập
+n = len(df)
+train_end = int(n * 0.7)
+valid_end = train_end + int(n * 0.1)
 
-# Cắt tập dữ liệu theo tỷ lệ 7:1:2
-train_df = df.iloc[:train_size]
-valid_df = df.iloc[train_size:train_size + valid_size]
-test_df = df.iloc[train_size + valid_size:]
+# Chia dữ liệu
+df_train = df.iloc[:train_end]
+df_valid = df.iloc[train_end:valid_end]
+df_test = df.iloc[valid_end:]
 
-# Xuất ra các file CSV
-train_df.to_csv("Dataset/712/train.csv", index=False)
-valid_df.to_csv("Dataset/712/valid.csv", index=False)
-test_df.to_csv("Dataset/712/test.csv", index=False)
+# Xuất kích thước mỗi tập
+print("Train size:", len(df_train))
+print("Validation size:", len(df_valid))
+print("Test size:", len(df_test))
+
+# (Tuỳ chọn) Lưu thành các file CSV riêng nếu muốn
+df_train.to_csv("Dataset/712/train.csv", index=False)
+df_valid.to_csv("Dataset/712/validation.csv", index=False)
+df_test.to_csv("Dataset/712/test.csv", index=False)
