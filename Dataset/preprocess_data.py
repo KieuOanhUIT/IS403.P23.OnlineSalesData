@@ -27,9 +27,6 @@ df = df.dropna(subset=["date"])
 # Tách năm ra thành cột mới (kiểu int)
 df["year"] = df["date"].dt.year.astype(int)
 
-# Xoá cột date nếu không cần
-df = df.drop(columns=["date"])
-
 # Xuất file kết quả
 df.to_csv("Dataset/ticket_sales_cleaned.csv", index=False)
 
