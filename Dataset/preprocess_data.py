@@ -1,4 +1,6 @@
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 # Đọc file CSV
 df = pd.read_csv("Dataset/cinemaTicket_Ref.csv")
@@ -32,3 +34,14 @@ df.to_csv("Dataset/ticket_sales_cleaned.csv", index=False)
 
 print("Xử lý xong! In vài dòng đầu:")
 print(df.head())
+
+# Vẽ biểu đồ doanh thu theo thời gian
+plt.figure(figsize=(14, 6))
+sns.lineplot(x='date', y='total_sales', data=df)
+plt.title('Doanh thu phim theo thời gian', fontsize=18)
+plt.xlabel('Ngày', fontsize=14)
+plt.ylabel('Doanh thu (VND)', fontsize=14)
+plt.xticks(rotation=45)
+plt.grid(True)
+plt.tight_layout()
+plt.show()
