@@ -13,7 +13,6 @@
 |  5  | 22520446 | Trần Trung Hiếu         |
 
 **Thông tin đồ án:**
-**Đề tài:** "Dự đoán doanh thu bán hàng trực tuyến:
-Phân tích, so sánh bằng thống kê, học máy và kỹ thuật học sâu"
+**Đề tài:** "Ứng dụng mô hình học máy, học sâu và các thuật toán thống kê để dự báo doanh thu phim ảnh"
 
-**Dataset:** https://www.kaggle.com/datasets/yusufdelikkaya/online-sales-dataset/data
+**Dataset:** [https://www.kaggle.com/datasets/yusufdelikkaya/online-sales-dataset/data](https://www.kaggle.com/datasets/arashnic/cinema-ticket)
