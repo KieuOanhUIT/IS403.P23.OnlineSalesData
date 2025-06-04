@@ -1,7 +1,7 @@
 import pandas as pd
 
 # Đọc dữ liệu từ file CSV
-df = pd.read_csv("Dataset/ticket_sales_cleaned.csv")
+df = pd.read_csv("Dataset/cleaned_data.csv")
 
 # Sắp xếp theo thời gian để đảm bảo thứ tự chuỗi thời gian
 df = df.sort_values('date').reset_index(drop=True)

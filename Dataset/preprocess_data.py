@@ -29,11 +29,23 @@ df = df.dropna(subset=["date"])
 # Tách năm ra thành cột mới (kiểu int)
 df["year"] = df["date"].dt.year.astype(int)
 
-# Xuất file kết quả
-df.to_csv("Dataset/ticket_sales_cleaned.csv", index=False)
-
-print("Xử lý xong! In vài dòng đầu:")
-print(df.head())
+# Gộp dữ liệu theo ngày
+grouped = df.groupby("date", as_index=False).agg({
+    'total_sales': 'sum',           # Tổng doanh thu trong ngày
+    'tickets_sold': 'sum',          # Tổng số vé bán
+    'tickets_out': 'sum',           # Tổng số vé xuất
+    'show_time': 'sum',             # Tổng số suất chiếu
+    'occu_perc': 'mean',            # Trung bình % ghế sử dụng
+    'ticket_price': 'mean',         # Trung bình giá vé
+    'ticket_use': 'sum',            # Tổng số vé sử dụng
+    'capacity': 'mean',             # Trung bình sức chứa rạp
+    'film_code': 'first',           
+    'cinema_code': 'nunique',       # Đếm số rạp chiếu khác nhau trong ngày
+    'month': 'first',               # Giữ nguyên tháng
+    'quarter': 'first',             # Giữ nguyên quý
+    'day': 'first',                 # Giữ nguyên ngày trong tháng
+    'year': 'first'                 
+})
 
 # Vẽ biểu đồ doanh thu theo thời gian
 plt.figure(figsize=(14, 6))
@@ -45,3 +57,10 @@ plt.xticks(rotation=45)
 plt.grid(True)
 plt.tight_layout()
 plt.show()
+
+# Xuất dữ liệu ra file CSV mới
+grouped.to_csv("Dataset/cleaned_data.csv", index=False)
+
+print(result)
+
+print("Đã lưu kết quả vào file 'cleaned_data.csv'")
